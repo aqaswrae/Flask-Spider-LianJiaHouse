@@ -1,0 +1,188 @@
+{% extends 'base1.html' %}
+{% block title %}数据展示{% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/demo1.css') }}">
+{% endblock %}
+
+
+{% block body %}
+    <table class="table">
+        <thead>
+        <tr>
+            <th class="th">选择</th>
+            <th class="th">序号</th>
+            <th class="th">房产名称</th>
+            <th class="th" id="year">
+                <div>
+                    <div class="name">建造年份</div>
+                    <div class="filterud">
+                        <div class="direct">
+                            <button type="button" id="btn1" onclick=btn1()>↑</button>
+                        </div>
+                        <div class="direct">
+                            <button type="button" id="btn2" onclick=btn2()>↓</button>
+                        </div>
+                    </div>
+                </div>
+            </th>
+            <th class="th">地址</th>
+            <th class="th">几室几厅</th>
+            <th class="th">特色</th>
+            <th class="th" id="area">
+                <div>
+                    <div class="name">建筑面积(m²)</div>
+                    <div class="filterud">
+                        <div class="direct">
+                            <button type="button" id="btn3" onclick=btn3()>↑</button>
+                        </div>
+                        <div class="direct">
+                            <button type="button" id="btn4" onclick=btn4()>↓</button>
+                        </div>
+                    </div>
+                </div>
+            </th>
+            <th class="th" id="avgprice">
+                <div>
+                    <div class="name">均价(元/平)</div>
+                    <div class="filterud">
+                        <div class="direct">
+                            <button type="button" id="btn5" onclick=btn5()>↑</button>
+                        </div>
+                        <div class="direct">
+                            <button type="button" id="btn6" onclick=btn6()>↓</button>
+                        </div>
+                    </div>
+                </div>
+            </th>
+            <th class="th" id="totalprice">
+                <div>
+                    <div class="name">总价(万/套)</div>
+                    <div class="filterud">
+                        <div class="direct">
+                            <button type="button" id="btn7" onclick=btn7()>↑</button>
+                        </div>
+                        <div class="direct">
+                            <button type="button" id="btn8" onclick=btn8()>↓</button>
+                        </div>
+                    </div>
+                </div>
+            </th>
+            <th class="th">购房者</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for houseinfo in oldhouse_info %}
+            <tr>
+                <td><input type="checkbox" name="houseinfo_ids" value="{{ houseinfo.id }}">
+                    <button type="submit" onclick=shanchu(this)>删除</button>
+                </td>
+                <td>{{ houseinfo.id }}</td>
+                <td>{{ houseinfo.housename }}</td>
+                <td>{{ houseinfo.year }}</td>
+                <td>{{ houseinfo.location }}</td>
+                <td>{{ houseinfo.room }}</td>
+                <td>{{ houseinfo.tag }}</td>
+                <td>{{ houseinfo.area }}</td>
+                <td>{{ houseinfo.avgprice }}</td>
+                <td>{{ houseinfo.totalprice }}</td>
+                <td>{{ houseinfo.user_id }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+
+
+    </table>
+    {#    <script type="text/javascript" src="{{ url_for('static',filename='js/demo1.js') }}"></script>#}
+    <script>
+        let tbody = document.querySelector('tbody')
+
+
+        function btn1() {
+            tbody.innerHTML = '';
+            {% for houseinfo in year_asc %}
+                var tr = document.createElement('tr');
+                tr.innerHTML = '<td><input type="checkbox" name="houseinfo_ids" value="{{ houseinfo.id }}"> <button type="submit" onclick=shanchu(this)>删除</button> </td><td>{{ houseinfo.id }}</td><td>{{ houseinfo.housename }}</td><td>{{ houseinfo.year }}</td><td>{{ houseinfo.location }}</td><td>{{ houseinfo.room }}</td><td>{{ houseinfo.tag }}</td><td>{{ houseinfo.area }}</td><td>{{ houseinfo.avgprice }}</td><td>{{ houseinfo.totalprice }}</td><td>{{ houseinfo.user_id }}</td>';
+                tbody.appendChild(tr);
+            {% endfor %}
+        }
+
+        function btn2() {
+            tbody.innerHTML = '';
+            {% for houseinfo in year_desc %}
+                var tr = document.createElement('tr');
+                tr.innerHTML = '<td><input type="checkbox" name="houseinfo_ids" value="{{ houseinfo.id }}"> <button type="submit" onclick=shanchu(this)>删除</button> </td><td>{{ houseinfo.id }}</td><td>{{ houseinfo.housename }}</td><td>{{ houseinfo.year }}</td><td>{{ houseinfo.location }}</td><td>{{ houseinfo.room }}</td><td>{{ houseinfo.tag }}</td><td>{{ houseinfo.area }}</td><td>{{ houseinfo.avgprice }}</td><td>{{ houseinfo.totalprice }}</td><td>{{ houseinfo.user_id }}</td>';
+                tbody.appendChild(tr);
+            {% endfor %}
+        }
+
+        function btn3() {
+            tbody.innerHTML = '';
+            {% for houseinfo in area_asc %}
+                var tr = document.createElement('tr');
+                tr.innerHTML = '<td><input type="checkbox" name="houseinfo_ids" value="{{ houseinfo.id }}"> <button type="submit" onclick=shanchu(this)>删除</button> </td><td>{{ houseinfo.id }}</td><td>{{ houseinfo.housename }}</td><td>{{ houseinfo.year }}</td><td>{{ houseinfo.location }}</td><td>{{ houseinfo.room }}</td><td>{{ houseinfo.tag }}</td><td>{{ houseinfo.area }}</td><td>{{ houseinfo.avgprice }}</td><td>{{ houseinfo.totalprice }}</td><td>{{ houseinfo.user_id }}</td>';
+                tbody.appendChild(tr);
+            {% endfor %}
+        }
+
+        function btn4() {
+            tbody.innerHTML = '';
+            {% for houseinfo in area_desc %}
+                var tr = document.createElement('tr');
+                tr.innerHTML = '<td><input type="checkbox" name="houseinfo_ids" value="{{ houseinfo.id }}"> <button type="submit" onclick=shanchu(this)>删除</button> </td><td>{{ houseinfo.id }}</td><td>{{ houseinfo.housename }}</td><td>{{ houseinfo.year }}</td><td>{{ houseinfo.location }}</td><td>{{ houseinfo.room }}</td><td>{{ houseinfo.tag }}</td><td>{{ houseinfo.area }}</td><td>{{ houseinfo.avgprice }}</td><td>{{ houseinfo.totalprice }}</td><td>{{ houseinfo.user_id }}</td>';
+                tbody.appendChild(tr);
+            {% endfor %}
+        }
+
+        function btn5() {
+            tbody.innerHTML = '';
+            {% for houseinfo in avg_asc %}
+                var tr = document.createElement('tr');
+                tr.innerHTML = '<td><input type="checkbox" name="houseinfo_ids" value="{{ houseinfo.id }}"> <button type="submit" onclick=shanchu(this)>删除</button> </td><td>{{ houseinfo.id }}</td><td>{{ houseinfo.housename }}</td><td>{{ houseinfo.year }}</td><td>{{ houseinfo.location }}</td><td>{{ houseinfo.room }}</td><td>{{ houseinfo.tag }}</td><td>{{ houseinfo.area }}</td><td>{{ houseinfo.avgprice }}</td><td>{{ houseinfo.totalprice }}</td><td>{{ houseinfo.user_id }}</td>';
+                tbody.appendChild(tr);
+            {% endfor %}
+        }
+
+        function btn6() {
+            tbody.innerHTML = '';
+            {% for houseinfo in avg_desc %}
+                var tr = document.createElement('tr');
+                tr.innerHTML = '<td><input type="checkbox" name="houseinfo_ids" value="{{ houseinfo.id }}"> <button type="submit" onclick=shanchu(this)>删除</button> </td><td>{{ houseinfo.id }}</td><td>{{ houseinfo.housename }}</td><td>{{ houseinfo.year }}</td><td>{{ houseinfo.location }}</td><td>{{ houseinfo.room }}</td><td>{{ houseinfo.tag }}</td><td>{{ houseinfo.area }}</td><td>{{ houseinfo.avgprice }}</td><td>{{ houseinfo.totalprice }}</td><td>{{ houseinfo.user_id }}</td>';
+                tbody.appendChild(tr);
+            {% endfor %}
+        }
+
+        function btn7() {
+            tbody.innerHTML = '';
+            {% for houseinfo in total_asc %}
+                var tr = document.createElement('tr');
+                tr.innerHTML = '<td><input type="checkbox" name="houseinfo_ids" value="{{ houseinfo.id }}"> <button type="submit" onclick=shanchu(this)>删除</button> </td><td>{{ houseinfo.id }}</td><td>{{ houseinfo.housename }}</td><td>{{ houseinfo.year }}</td><td>{{ houseinfo.location }}</td><td>{{ houseinfo.room }}</td><td>{{ houseinfo.tag }}</td><td>{{ houseinfo.area }}</td><td>{{ houseinfo.avgprice }}</td><td>{{ houseinfo.totalprice }}</td><td>{{ houseinfo.user_id }}</td>';
+                tbody.appendChild(tr);
+            {% endfor %}
+        }
+
+        function btn8() {
+            tbody.innerHTML = '';
+            {% for houseinfo in total_desc %}
+                var tr = document.createElement('tr');
+                tr.innerHTML = '<td><input type="checkbox" name="houseinfo_ids" value="{{ houseinfo.id }}"> <button type="submit" onclick=shanchu(this)>删除</button> </td><td>{{ houseinfo.id }}</td><td>{{ houseinfo.housename }}</td><td>{{ houseinfo.year }}</td><td>{{ houseinfo.location }}</td><td>{{ houseinfo.room }}</td><td>{{ houseinfo.tag }}</td><td>{{ houseinfo.area }}</td><td>{{ houseinfo.avgprice }}</td><td>{{ houseinfo.totalprice }}</td><td>{{ houseinfo.user_id }}</td>';
+                tbody.appendChild(tr);
+            {% endfor %}
+        }
+
+        function shanchu(btn) {
+            if (confirm('确定要删除该条房产数据吗？')) {
+                var row = btn.parentNode.parentNode;
+                var input = row.querySelector('input');
+                var inputValue = input.value;
+                console.log(inputValue);
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', '/delete/deleteold');
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                var data = JSON.stringify({"inputValue": inputValue});
+                xhr.send(data);
+                row.parentNode.removeChild(row)
+            }
+        }
+    </script>
+
+{% endblock %}

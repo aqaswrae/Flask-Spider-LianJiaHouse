@@ -1,0 +1,42 @@
+
+#area, #avgprice, #totalprice {
+    /* display: flex; */
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+#year>div,#area > div, #avgprice > div, #totalprice > div {
+    display: flex;
+    color: pink;
+    /* border: 1px solid; */
+}
+
+.name, .filterud {
+    display: flex;
+    /* flex-wrap: wrap; */
+}
+
+.name {
+    width: 70px;
+    height: 30px;
+    text-align: center;
+    margin: auto;
+}
+
+.direct {
+    height: 25px;
+}
+
+.filterud {
+    height: 50px;
+}
+
+.table td,
+.table th {
+    padding: .75rem;
+    /* vertical-align: top;  */
+    border-top: 1px solid #dee2e6;
+    text-align: center;
+    height: 50px;
+    width: auto;
+}

@@ -1,0 +1,45 @@
+{% extends 'base1.html' %}
+{% block title %}用户数据管理{% endblock %}
+{% block head %}{% endblock %}
+{% block body %}
+    <form action="" method="post">
+        <table class="table">
+            <thead>
+            <tr>
+                <th class="th">选择</th>
+                <th class="th">序号</th>
+                <th class="th">用户名</th>
+                <th class="th">密码</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for userinfo in userdata %}
+                <tr>
+                    <td><input type="checkbox" name="user_ids" value="{{ userinfo.id }}">
+                        <button type="button" onclick=shanchu(this)>删除</button>
+                    </td>
+                    <td>{{ userinfo.id }}</td>
+                    <td>{{ userinfo.username }}</td>
+                    <td>{{ userinfo.password }}</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </form>
+    <script>
+        function shanchu(btn) {
+            if (confirm('确定要删除该用户信息吗？')) {
+                var row = btn.parentNode.parentNode;
+                var input = row.querySelector('input');
+                var inputValue = input.value;
+                console.log(inputValue);
+                var xhr = new XMLHttpRequest();
+                xhr.open('POST', '/delete/delete_row');
+                xhr.setRequestHeader('Content-Type', 'application/json');
+                var data = JSON.stringify({"inputValue": inputValue});
+                xhr.send(data);
+                row.parentNode.removeChild(row)
+            }
+        }
+    </script>
+{% endblock %}

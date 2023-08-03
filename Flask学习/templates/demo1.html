@@ -1,0 +1,146 @@
+{% extends 'base1.html' %}
+{% block title %}数据展示{% endblock %}
+{% block head %}
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/demo1.css') }}">
+{% endblock %}
+
+
+{% block body %}
+    <form action="" method="post">
+    <table class="table">
+        <thead>
+        <tr>
+            <th class="th">选择</th>
+            <th class="th">序号</th>
+            <th class="th">房产名称</th>
+            <th class="th">开发商</th>
+            <th class="th">地址</th>
+            <th class="th">几室几厅</th>
+            <th class="th">房产类型</th>
+            <th class="th">特色</th>
+            <th class="th" id="area">
+                <div>
+                    <div class="name">建筑面积(m²)</div>
+                    <div class="filterud">
+                        <div class="direct">
+                            <button type="button" id="btn1" onclick=btn1()>↑</button>
+                        </div>
+                        <div class="direct">
+                            <button type="button" id="btn2" onclick=btn2()>↓</button>
+                        </div>
+                    </div>
+                </div>
+            </th>
+            <th class="th" id="avgprice">
+                <div>
+                    <div class="name">均价(元/平)</div>
+                    <div class="filterud">
+                        <div class="direct">
+                            <button type="button" id="btn3" onclick=btn3()>↑</button>
+                        </div>
+                        <div class="direct">
+                            <button type="button" id="btn4" onclick=btn4()>↓</button>
+                        </div>
+                    </div>
+                </div>
+            </th>
+            <th class="th" id="totalprice">
+                <div>
+                    <div class="name">总价(万/套)</div>
+                    <div class="filterud">
+                        <div class="direct">
+                            <button type="button" id="btn5" onclick=btn5()>↑</button>
+                        </div>
+                        <div class="direct">
+                            <button type="button" id="btn6" onclick=btn6()>↓</button>
+                        </div>
+                    </div>
+                </div>
+            </th>
+
+        </tr>
+        </thead>
+        <tbody>
+        {% for houseinfo in newhouse_info %}
+            <tr>
+                <td><input type="checkbox" name="houseinfo_ids" value="{{ houseinfo.id }}">
+                    <button type="submit" onclick=shanchu()>删除</button></td>
+                <td>{{ houseinfo.id }}</td>
+                <td>{{ houseinfo.housename }}</td>
+                <td>{{ houseinfo.developer }}</td>
+                <td>{{ houseinfo.location }}</td>
+                <td>{{ houseinfo.room }}</td>
+                <td>{{ houseinfo.ty }}</td>
+                <td>{{ houseinfo.tag }}</td>
+                <td>{{ houseinfo.area }}</td>
+                <td>{{ houseinfo.avgprice }}</td>
+                <td>{{ houseinfo.totalprice }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    </form>
+    {#    <script type="text/javascript" src="{{ url_for('static',filename='js/demo1.js') }}"></script>#}
+    <script>
+        let tbody = document.querySelector('tbody')
+
+        function btn1() {
+            tbody.innerHTML = '';
+            {% for houseinfo in area_asc %}
+                var tr = document.createElement('tr');
+                tr.innerHTML = '<td>{{ houseinfo.id }}</td><td>{{ houseinfo.housename }}</td><td>{{ houseinfo.developer }}</td><td>{{ houseinfo.location }}</td><td>{{ houseinfo.room }}</td><td>{{ houseinfo.ty }}</td><td>{{ houseinfo.tag }}</td><td>{{ houseinfo.area }}</td><td>{{ houseinfo.avgprice }}</td><td>{{ houseinfo.totalprice }}</td>';
+                tbody.appendChild(tr);
+            {% endfor %}
+        }
+
+        function btn2() {
+            tbody.innerHTML = '';
+            {% for houseinfo in area_desc %}
+                var tr = document.createElement('tr');
+                tr.innerHTML = '<td>{{ houseinfo.id }}</td><td>{{ houseinfo.housename }}</td><td>{{ houseinfo.developer }}</td><td>{{ houseinfo.location }}</td><td>{{ houseinfo.room }}</td><td>{{ houseinfo.ty }}</td><td>{{ houseinfo.tag }}</td><td>{{ houseinfo.area }}</td><td>{{ houseinfo.avgprice }}</td><td>{{ houseinfo.totalprice }}</td>';
+                tbody.appendChild(tr);
+            {% endfor %}
+        }
+
+        function btn3() {
+            tbody.innerHTML = '';
+            {% for houseinfo in avg_asc %}
+                var tr = document.createElement('tr');
+                tr.innerHTML = '<td>{{ houseinfo.id }}</td><td>{{ houseinfo.housename }}</td><td>{{ houseinfo.developer }}</td><td>{{ houseinfo.location }}</td><td>{{ houseinfo.room }}</td><td>{{ houseinfo.ty }}</td><td>{{ houseinfo.tag }}</td><td>{{ houseinfo.area }}</td><td>{{ houseinfo.avgprice }}</td><td>{{ houseinfo.totalprice }}</td>';
+                tbody.appendChild(tr);
+            {% endfor %}
+        }
+
+        function btn4() {
+            tbody.innerHTML = '';
+            {% for houseinfo in avg_desc %}
+                var tr = document.createElement('tr');
+                tr.innerHTML = '<td>{{ houseinfo.id }}</td><td>{{ houseinfo.housename }}</td><td>{{ houseinfo.developer }}</td><td>{{ houseinfo.location }}</td><td>{{ houseinfo.room }}</td><td>{{ houseinfo.ty }}</td><td>{{ houseinfo.tag }}</td><td>{{ houseinfo.area }}</td><td>{{ houseinfo.avgprice }}</td><td>{{ houseinfo.totalprice }}</td>';
+                tbody.appendChild(tr);
+            {% endfor %}
+        }
+
+        function btn5() {
+            tbody.innerHTML = '';
+            {% for houseinfo in total_asc %}
+                var tr = document.createElement('tr');
+                tr.innerHTML = '<td>{{ houseinfo.id }}</td><td>{{ houseinfo.housename }}</td><td>{{ houseinfo.developer }}</td><td>{{ houseinfo.location }}</td><td>{{ houseinfo.room }}</td><td>{{ houseinfo.ty }}</td><td>{{ houseinfo.tag }}</td><td>{{ houseinfo.area }}</td><td>{{ houseinfo.avgprice }}</td><td>{{ houseinfo.totalprice }}</td>';
+                tbody.appendChild(tr);
+            {% endfor %}
+        }
+
+        function btn6() {
+            tbody.innerHTML = '';
+            {% for houseinfo in total_desc %}
+                var tr = document.createElement('tr');
+                tr.innerHTML = '<td>{{ houseinfo.id }}</td><td>{{ houseinfo.housename }}</td><td>{{ houseinfo.developer }}</td><td>{{ houseinfo.location }}</td><td>{{ houseinfo.room }}</td><td>{{ houseinfo.ty }}</td><td>{{ houseinfo.tag }}</td><td>{{ houseinfo.area }}</td><td>{{ houseinfo.avgprice }}</td><td>{{ houseinfo.totalprice }}</td>';
+                tbody.appendChild(tr);
+            {% endfor %}
+        }
+        function shanchu() {
+
+        }
+    </script>
+
+{% endblock %}

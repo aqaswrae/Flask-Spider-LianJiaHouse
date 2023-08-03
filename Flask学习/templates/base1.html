@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/bootstrap.4.6.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/init.css') }}">
+    {% block head %}{% endblock %}
+    <title>{% block title %}{% endblock %}</title>
+</head>
+
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <a class="navbar-brand" href="#">房产信息监测系统</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/">首页 <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://127.0.0.1:5000/publishinfo/newhouseinfo" target="_blank">发布新房</a>
+                    {#                    <seclect id="select3">#}
+                    {#                        <option value="">发布房产信息</option>#}
+                    {#                        <option value="http://127.0.0.1:5000/publishinfo/newhouseinfo">发布新房信息</option>#}
+                    {#                        <option value="http://127.0.0.1:5000/publishinfo/oldhouseinfo">发布二手房信息</option>#}
+                    {#                    </seclect>#}
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://127.0.0.1:5000/publishinfo/oldhouseinfo" target="_blank">发布二手房</a>
+                </li>
+{#                <li class="nav-item ml-2">#}
+{#                    <form class="form-inline my-2 my-lg-0" method="GET" action="">#}
+{#                        <input class="form-control mr-sm-2" type="search" placeholder="关键字" aria-label="Search"#}
+{#                               name="q">#}
+{#                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>#}
+{#                    </form>#}
+{#                </li>#}
+                <li>
+                    <form class="nav-item active">
+                        <!-- <a class="nav-link" href="/">数据查看 <span class="sr-only">(current)</span></a> -->
+                        <!-- <a class="nav-link" href="/">价格分析 <span class="sr-only">(current)</span></a> -->
+                        <select name="data-view" id="select1">
+                            <option value="">数据查看</option>
+                            <option value="http://127.0.0.1:5000/displayinfo/adminnewhouseinfo" class="xinfang">新房</option>
+                            <option value="http://127.0.0.1:5000/displayinfo/adminoldhouseinfo">二手房</option>
+                        </select>
+                        <select name="price-analysis" id="select2">
+                            <option value="">价格分析</option>
+                            <option value="http://127.0.0.1:5000/datavisualization/avgprice">均价分析</option>
+                            <option value="http://127.0.0.1:5000/datavisualization/totalprice">总价分析</option>
+                            <option value="http://127.0.0.1:5000/datavisualization/distribution">地区-房产数量分析</option>
+                            <option value="http://127.0.0.1:5000/datavisualization/year">年份-房产建造数量分析</option>
+                        </select>
+                    </form>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="http://127.0.0.1:5000/displayinfo/userdata" target="_blank">用户数据管理</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav">
+                {% if user %}
+                    <li class="nav-item">
+                        <span class="nav-link">{{ user.username }}</span>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('user.logout') }}">退出登录</a>
+                    </li>
+                {% elif admin %}
+                    <li class="nav-item">
+                        <span class="nav-link">{{ admin.adminname }}</span>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('user.logout') }}">退出登录</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('user.login') }}">用户登录</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('user.adminlogin') }}">管理员登录</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url_for('user.register') }}">注册</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    {% block body %}{% endblock %}
+</div>
+</body>
+<script>
+    let pubSelect = document.querySelectorAll('#select3')
+    let aSelect = document.querySelectorAll("#select1");
+    let bSelect = document.querySelectorAll("#select2");
+    {#console.log(aSelect);#}
+    for (var x = 0; x < pubSelect.length; i++) {
+        pubSelect[x].onchange = function () {
+            var url = this.options[this.selectedIndex].value;
+            if (url != '') {
+                window.open(url);
+            }
+        }
+    }
+    for (var i = 0; i < aSelect.length; i++) {
+        aSelect[i].onchange = function () {
+            var url = this.options[this.selectedIndex].value;
+            if (url != '') {
+                window.open(url);
+            }
+        }
+    }
+    for (var j = 0; j < bSelect.length; j++) {
+        bSelect[j].onchange = function () {
+            var url = this.options[this.selectedIndex].value;
+            if (url != '') {
+                window.open(url);
+            }
+        }
+    }
+</script>
+
+</html>

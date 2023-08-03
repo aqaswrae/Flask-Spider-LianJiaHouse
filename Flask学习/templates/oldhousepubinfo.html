@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='css/userlogin.css')}}">
+</head>
+<body>
+
+{#    <form action="#" method="post">#}
+{#        {{ form.csrf_token() }}#}
+{#        {{ form.housename.label }}:{{ form.housename }}<br>#}
+{#        {{ form.developer.label }}:{{ form.developer }}<br>#}
+{#        {{ form.year.label }}:{{ form.year }}<br>#}
+{#        {{ form.location.label }}:{{ form.location }}<br>#}
+{#        {{ form.room.label }}:{{ form.room }}<br>#}
+{#        {{ form.tag.label }}:{{ form.tag }}<br>#}
+{#        {{ form.area.label }}:{{ form.area }}<br>#}
+{#        {{ form.avgprice.label }}:{{ form.avgprice }}<br>#}
+{#        {{ form.totalprice.label }}:{{ form.totalprice }}<br>#}
+{#        <p>{{ form.submit() }}</p>#}
+{#    </form>#}
+<div class="box">
+    <div class="login-box">
+        <h1>发布二手房信息</h1>
+        <form action="#" method="post">
+            {{ form.csrf_token() }}
+            <div class="user-box">
+                {{ form.housename.label }}:{{ form.housename }}<br>
+                <label for="">小区名称</label>
+            </div>
+            <div class="user-box">
+                {{ form.year.label }}:{{ form.year }}<br>
+                <label for="">建造年份</label>
+            </div>
+            <div class="user-box">
+                {{ form.location.label }}:{{ form.location }}<br>
+                <label for="">地址</label>
+            </div>
+            <div class="user-box">
+                {{ form.room.label }}:{{ form.room }}<br>
+                <label for="">几室几厅</label>
+            </div>
+            <div class="user-box">
+                {{ form.tag.label }}:{{ form.tag }}<br>
+                <label for="">房产标签</label>
+            </div>
+            <div class="user-box">
+                {{ form.area.label }}:{{ form.area }}<br>
+                <label for="">建筑面积</label>
+            </div>
+            <div class="user-box">
+                {{ form.avgprice.label }}:{{ form.avgprice }}<br>
+                <label for="">均价</label>
+            </div>
+            <div class="user-box">
+                {{ form.totalprice.label }}:{{ form.totalprice }}<br>
+                <label for="">总价</label>
+            </div>
+            <p>{{ form.submit() }}</p>
+        </form>
+    </div>
+</div>
+</body>
+</html>

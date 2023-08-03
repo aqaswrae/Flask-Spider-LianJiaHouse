@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <stytle><link href="../static/css/userlogin.css" rel="stylesheet"></stytle>
+
+</head>
+<body>
+
+{#    <form action="#" method="post">#}
+{#        {{ form.csrf_token() }}#}
+{#        {{ form.username.label }}:{{ form.username }}<br>#}
+{#        {{ form.password.label }}:{{ form.password }}<br>#}
+{#        {{ form.check_password.label }}:{{ form.check_password }}<br>#}
+{#        <p>{{ form.submit() }}</p>#}
+{#    </form>#}
+    <div class="box">
+        <div class="login-box">
+            <h1>登录</h1>
+            <form action="#" method="post">
+                {{ form.csrf_token() }}
+                <div class="user-box">
+                    {{ form.username.label }}:{{ form.username }}<br>
+                    <label for="">用户名</label>
+                </div>
+                <div class="user-box">
+                    {{ form.password.label }}:{{ form.password }}<br>
+                    <label for="">密码</label>
+                </div>
+                <p>{{ form.submit() }}</p>
+            </form>
+        </div>
+    </div>
+</body>
+</html>
